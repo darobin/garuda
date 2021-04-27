@@ -47,18 +47,386 @@
   <body>
     <section id="abstract">
       <p>
-        Tk
+        Multiple proposals exist to reform programmatic advertising on the Web and some, most
+        notably <a href="https://github.com/microsoft/privacy-preserving-ads/blob/main/Parakeet.md">PARAKEET</a>,
+        the FLEDGE bid server, and ongoing work by <a href="https://prebid.org/">Prebid</a>, rely on
+        the existence of a <em>trustworthy</em> server that can perform tasks such as anonymising ad
+        requests. This type of model has interesting properties, notably they are easier to audit
+        and do not require moving significant chunks of logic into the browser, but they also suffer
+        from the problem that the server itself must be trusted, even while sitting outside the
+        realm of the user's control.
+      </p>
+      <p>
+        This document drafts an overall vision and governance model able to support such
+        trustworthy utility servers by having them owned and operated by an entity governed in
+        common by different constituencies. The name comes from <a href="https://en.wikipedia.org/wiki/Garuda">Garuda</a>,
+        which Wikipedia describes as "<em>the king of birds</em>" and "<em>a protector with the power
+        to swiftly go anywhere, ever watchful</em>."
       </p>
     </section>
     <section id="sotd"></section>
     <!--
       XXX:
-      - copy the notes from Notion
     -->
     <section>
-      <h2>Introduction</h2>
+      <h2>The Goal of Garuda</h2>
       <p>
-        Tk
+        The objective of this proposal is to <em>make a trustworthy advertising server
+        possible.</em> The notion of a trustworthy advertising server is a potentially very
+        powerful one in that it can enable a number of highly-desirable use cases in advertising
+        technology, notably that of anonymising requests. However, trust does not appear as if by
+        magic and it needs to be designed for.
+      </p>
+      <p>
+        Several suggestions have been made in order to make this trust possible, but none of them
+        works just yet:
+      </p>
+      <ul>
+        <li>
+          <strong>Just trust the publisher/intermediary/tech company</strong>. This is not a
+          realistic option, certainly not for a system meant to operate in the wild and at this
+          scale. The web is trustworthy <em>because</em> there is no need to trust a website. This
+          property needs to be imported here.
+        </li>
+        <li>
+          <strong>Use some form of secure multiparty computation magic</strong>. Purely
+          mathematical solutions are great in that they are highly enforceable; however it is not
+          clear that this problem can be solved in full that way, straight from the browser.
+        </li>
+        <li>
+          <strong>It's open source!</strong> That is great, and whatever Garuda produces will be
+          open source, but just because something is open source doesn't prove that the system
+          running it is actually running that open source implementation as is — it's pretty easy to
+          cheat.
+        </li>
+        <li>
+          <strong>Rely on regulation or contracts</strong>. Our jobs as technologists would be a
+          lot simpler if we could treat technology as neutral and offload figuring out the hard
+          human parts to legislators. Unfortunately, that approach is not just not simple but
+          simplistic. It does not account for the cost of contractual enforcement (who finances the
+          audits, for instance) nor does it account for regulatory capture (which runs rampant in
+          privacy).
+        </li>
+        <li>
+          <strong>Move everything into the browser</strong>. The browser is intended as a point of
+          maximal trust for users, and to a large degree this trust is inescapable. Unfortunately,
+          there is no longer consensus in the Web community that all major browsers are acting as
+          trustworthy agents for the users and there is suspicion of self-dealing from some vendors,
+          particularly relating to advertising. While I wish nothing more than to see trust in
+          browsers rebuilt, this proposal endeavours to deal with the cards as have been given and
+          not those I might wish we had had instead.
+        </li>
+      </ul>
+      <p>
+        Garuda's core tenet is that we can solve problems of trust with human arrangements. On the
+        downside, these are necessarily imperfect and they incur some overhead. On the upside, a
+        group of people with effective checks and balances can handle complex and evolving
+        situations better than anything else — and provide a strong foundation atop which to build
+        trust between parties that, historically and structurally, have not trusted one another
+        much.
+      </p>
+      <p>
+        The responsibilities of the Garuda group include:
+      </p>
+      <ul>
+        <li>Shepherding the technical standards that define the Garuda trustworthy server.</li>
+        <li>Managing the open source implementation and maintenance of the trustworthy server.</li>
+        <li>Operating the worldwide network of trustworthy servers and supporting their being
+          audited.</li>
+        <li>Ensuring the general health of the advertising ecosystem by providing a common space
+          where stakeholders must reach some form of consensus in order for the system to operate.
+        </li>
+      </ul>
+    </section>
+    <section>
+      <h2>The Impossible, Inescapable Reform of Advertising</h2>
+      <p>
+        Digital advertising is an essential utility. It has rightly become hated through decades of
+        mismanagement, but while other business models do exist and should prosper, they are simply
+        insufficient to make up for the loss that eradicating advertising would cause. Our only
+        option, then, is to fix it.
+      </p>
+      <p>
+        While most parties support reform, it is proving politically difficult to achieve.
+        Advertising is a complex environment involving multiple stakeholders that run completely
+        different organisations and the pieces they provide must all more or less fit together for
+        the system to function. The current system operates poorly — in some parts staggeringly so —
+        but it does operate. Changing the way in which some parts fit together requires different
+        stakeholders to agree to change in matching ways, and therein lies the rub.
+      </p>
+      <p>
+        It is difficult to coordinate such a change because, for historical reason that we need not
+        discuss here, most of the parties actively distrust one another.
+      </p>
+      <p>
+        We therefore find ourselves presented with a choice: reform can either happen through
+        vertical integration which will favour the most intergrated, or it can happen through
+        multistakeholder standards. The latter is preferable since it is pro-competitive and can
+        bring forward a healthier ecosystem in which more voices are represented, but it can only
+        exist if we can develop a governance structure that will foster trust between stakeholders
+        by empowering their participation and granting them auditing rights and principles to serve
+        as checks and balances for the system.
+      </p>
+      <p>
+        This is where a trustworthy server becomes a particularly useful construct. Since it
+        <em>has</em> to be trusted by all stakeholders (no one would trust such a server operated by
+        just one type of party), it provides a common space for browsers (representing users),
+        publishers, and adtech intermediaries to meet, and where they can be put in a position of
+        <em>needing</em> to achieve consensus for the system to operate.
+      </p>
+    </section>
+    <section>
+      <h2>Governance for Advertising</h2>
+      <p>
+        The past two decades in digital advertising have largely been defined by the avoidance of
+        governance, and I believe that we have reached a stage at which most actors would agree it
+        is time for a change. What would that look like?
+      </p>
+      <p>
+        The proposed trustworthy servers look likely to all be open source. That is an important
+        first step but is not sufficient. Just because a solution is open source does not prove that
+        the code which one can inspect is what is running on a given server. Stronger guarantees of
+        auditing and verification are required for this system to prove itself as trustworthy to all
+        parties.
+      </p>
+      <p>
+        Significant parts of the Internet's infrastructure operate under more or less formal
+        governance arrangements. Standards, of course (W3C, IETF, WHATWG, TC-39), but also top-level
+        domain names, internet peering, or the ISRG and Let's Encrypt. We can make this work for
+        advertising too.
+      </p>
+      <p>
+        Detailing a full governance model would be a longer undertaking that would require input
+        from a variety of partners. I'm simply including a quick outline to show feasibility.
+      </p>
+      <p>
+        The governance model can be summarised as follows:
+      </p>
+      <ul>
+        <li>
+          There are three primary constituencies: browser vendors (vendors, not engines, and
+          expected to proxy for users), publishers, and adtech intermediaries. For each of them,
+          there are inclusion criteria that are based on volume of the traffic they see through the
+          trustworthy server.
+        </li>
+        <li>
+          Any entity eligible to be part of a constituency has some voting rights. These voting
+          rights allow them to elect their representatives to the Governance Board for that
+          constituency. Candidates can be nominated by any party with voting rights. Governance
+          Board seats are open for three years with a third being renewed every year.
+        </li>
+        <li>
+          Oversight over Garuda is managed by the Governance Board. Each constituency has three
+          representatives on that board. No company can have more than one representative, even in
+          different constituencies. If one constituency has fewer than two candidates in a given
+          election, then it gains zero representation. (If interest from that group is too low, it
+          shouldn't be taken over by a single party.)
+        </li>
+        <li>
+          Supermajority rule: some changes require a supermajority of the Board. Supermajority is
+          defined as:
+          <ul>
+            <li>
+              ⅔rd of the members of the Board vote in support; and
+            </li>
+            <li>
+              at least one Board member from each constituency must vote in support (so if the
+              three members from one constituency are agreed against, they effectively have veto
+              power).
+            </li>
+          </ul>
+        </li>
+        <li>
+          Garuda operates according to fundamental ethical principles (which need to be written
+          before it kicks off). These principles can be changed with supermajority. The purpose of
+          these principles is to guide the Board's discussions and inform its decisions. All Board
+          deliberations are public (with perhaps a few exceptions for personnel matters).
+        </li>
+        <li>
+          The Governance Board selects (by consensus) an Executive Director every three years.
+          There is a strong assumption that the Executive Director will not necessarily be renewed:
+          every time a new ED must be selected, the Board is expected to review multiple candidates.
+          The Board can revoke the ED with supermajority.
+        </li>
+        <li>
+          The Executive Director leads the Garuda Legal Entity, under the control of the Board.
+          The Legal Entity is tasked with day to day operations, including of the servers, with
+          research into future technology that Garuda could use, with organising the various working
+          groups that will bring stakeholders together to help evolve Garuda over time, and with the
+          elaboration of policy positions which Garuda will cooperate with regulators on.
+        </li>
+        <li>
+          The Legal Entity is financed through a very small tax on advertising. Two models are
+          possible: one is a flat fee per request, another is a percentage of effective CPM. The
+          latter is preferred in that it will incentivise Garuda to increase effectiveness of
+          advertising (whereas the former incentivises volume) but may prove more complicated to
+          build, especially in terms of how to avoid lying about it (so long as it's above the
+          provided bid floor). The amount and type of the tax is determined by the Board. The
+          overall taxation structure might further depend on the type of operation requested, since
+          not all are equally computationally expensive, and making sure that we properly cost in
+          computational cost is important from an ecological point of view.
+        </li>
+        <li>
+          Part of the tax should further be set aside to provide financial support to stakeholders
+          who cannot afford to pay someone to spend time in Board discussions, so as to ensure that
+          participants from companies of all sizes, and from all backgrounds the world around can
+          participate with equity.
+        </li>
+      </ul>
+    </section>
+    <section>
+      <h2>Use Cases This Opens Up</h2>
+      <p>
+        The immediate focus is on getting enough of a PARAKEET-like structure off the ground, so
+        that we can have an open source system and the server infrastructure to operate it in a
+        trustworthy fashion up and running. But longer-term, more can be done from this position
+        because the PARAKEET server creates a "place" of sort which can implement multiple adtech
+        functions in such a way that multiple stakeholders have to reach consensus as to how it
+        works. This can progressively build a way out of the current unilateral, conflict-driven
+        model that is causing so much strife across the ecosystem.
+      </p>
+      <p>
+        Some problems that this could help address are listed below. Note that I am deliberately
+        staying at a very high level for the time being as I do not believe that any of these should
+        be the first area of focus.
+      </p>
+      <ul>
+        <li>
+          <strong>Fraud</strong>: putting control over fraud prevention not just with
+          intermediaries would incentivise making it more effective. The trustworthy server has
+          access to detailed user information that can support fraud detection. How this would
+          integrated safely with fraud detection vendors is an open question.
+        </li>
+        <li>
+          <strong>Malvertising</strong>: users and publishers have strong incentives to prevent
+          malvertising, but are not usually in a position to do much about it. This would also help
+          provide the line of defence that they expect. Detecting malvertising at the trustworthy
+          level will cause less revenue loss than when it happens on the publisher side. This should
+          also make it easier to collaborate across servers to weed out dangerous creatives.
+        </li>
+        <li>
+          <strong>Privacy</strong>: the system is designed for that, but it could be extended to
+          protect user privacy in further contexts.
+        </li>
+        <li>
+          <strong>Accountability</strong>: the current system is opaque and operates with no audit
+          or control, and not visibility from most actors including publishers and users. Garuda
+          could help bring about a position of farm-to-table accountability and traceability for
+          creatives, of revenue transparency, and could help comply with coming regulations such as
+          the DSA — though that would also require changes to upstream intermediaries as well.
+        </li>
+        <li>
+          <strong>Brand Safety</strong>: this is a topic that needs to be managed with publisher
+          input, instead of the system we have now that doesn't work for anyone. Attesting agents on
+          the Garuda server could analyse the content of the page using a methodology of their own,
+          and pass an attestation in the bid that the page is brand safe. The methodology in
+          question would only be allowed to run on Garuda after consensus is found that it is not
+          unilaterally detrimental to publishers.
+        </li>
+        <li>
+          <strong>Creative Quality</strong>: ad creatives are produced with low quality
+          engineering and are often highly wasteful of resources, with the cost of poor experience
+          being borne by the publisher and user. This is a point of intervention for the server.
+          Managing creative quality is similar to malvertising at a technical level, but the
+          governance is different: we need the stakeholders to agree on what quality can get
+          blocked, and the buy side needs to be informed that their ads are being dropped.
+        </li>
+      </ul>
+    </section>
+    <section>
+      <h2>Known Issues</h2>
+      <p>
+        These issues need to be addressed before this can move forward.
+      </p>
+      <section>
+        <h3>The buy side is not represented</h3>
+        <p>
+          The buy side is where the money comes from and is the set of sources who have the strongest
+          incentives to keep everyone honest in terms of fraud, effectiveness, and brand safety.
+        </p>
+        <p>
+          There are several problems to solve here, though.
+        </p>
+        <p>
+          The first is <u>how to pick who is legitimately in that constituency</u>? For the other
+          three constituencies, we can gate on volume thresholds as measured by the Garuda system
+          itself. This makes for a reasonably easy system to select who is in the polity and has the
+          right to vote. For the buy side, one step removed, this is more complex. We probably cannot
+          scale this to every store that bought $300's worth of ads in the local paper (though, if
+          that were possible, it might be interesting). This would make it too easy and too cheap to
+          buy votes, too.
+        </p>
+        <p>
+          One potential solution is to make it so that the Garuda system knows who is paying for
+          every creative that it eventually serves. If the system supports farm-to-table traceability
+          and revenue transparency, this is a requirement anyway as the creative will need to contain
+          verifiable information about who paid for it and how much. Extracting this payment
+          information would make it possible to establish a volume threshold (in spend) for the
+          buy-side to be represented.
+        </p>
+        <p>
+          The second issue is <u>how to ensure that the constituencies are balanced</u>?
+          Historically, the interests of the buy-side and of the intermediaries have often aligned
+          against users, with publishers splitting between the two. This would almost guarantee
+          user-hostile outcomes such as a return to transparency &amp; control regimes or the
+          rejection of user agents as the user's fiduciary.
+        </p>
+        <p>
+          This could perhaps be addressed with principles (which we need anyway, and that would
+          prevent approaching users from an adversarial angle), which can't be changed without support
+          from at least one entity in each constituency, and also from the fact that if such
+          user-hostile tactics were to become supported in Garuda then the browsers would just walk,
+          returning the world to ad blocking and the such. But that feels like a relatively weak
+          protection.
+        </p>
+        <p>
+          Another way to address would be to add a fifth constituency being consumer organisations
+          (and having the browsers represent themselves only). But I have no idea how to select that
+          polity.
+        </p>
+      </section>
+    </section>
+    <section class="appendix">
+      <h2>Further Reading</h2>
+      <ul>
+        <li>
+          <a href="http://www.boundary2.org/2021/03/multistakeholder-internet-governance-still-doesnt-live-up-to-its-pr-review-of-palladino-and-santaniello-legitimacy-power-and-inequalities-in-the-multistakeholder-internet-governance/">Multistakeholder
+          Internet Governance Still Doesn’t Live Up to Its PR</a>
+        </li>
+        <li>
+          <a href="https://www.internetsociety.org/resources/doc/2016/internet-governance-why-the-multistakeholder-approach-works/">Internet
+          Governance – Why the Multistakeholder Approach Works</a></li>
+      </ul>
+    </section>
+    <section class="appendix">
+      <h2>Additional Notes</h2>
+      <ul>
+        <li>
+          Eventually, the "Ad Requests" in Garuda could evolved into "Attention Resources".
+        </li>
+        <li>
+          If we have trustworthy origins, could this make SXG viable? What governance would
+          <em>that</em> need?
+        </li>
+      </ul>
+    </section>
+    <section class="appendix">
+      <h2>Possible Sources</h2>
+      <ul>
+        <li>
+          Look at energy coops for governance models.
+        </li>
+        <li>
+          List alternative governance models, notably <a href="https://en.wikipedia.org/wiki/ICANN">ICANN</a>,
+          WTO consensus.
+        </li>
+      </ul>
+    </section>
+    <section class="appendix">
+      <h2>Acknowledgements</h2>
+      <p>
+        I stole a bunch of ideas from Mark Nottingham, and a few from Cullen Jennings too. Aram
+        Zucker-Scharff provided a lot of invaluable feedback.
       </p>
     </section>
   </body>
