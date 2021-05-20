@@ -36,7 +36,10 @@
           companyURL: 'https://nytimes.com/',
           url: 'https://berjon.com/',
         }],
-        github: 'https://github.com/darobin/garuda',
+        github: {
+          repoURL: 'https://github.com/darobin/garuda',
+          branch: 'main',
+        },
         edDraftURI: 'https://darobin.github.io/garuda/',
         shortName: 'garuda',
         localBiblio: {
@@ -45,16 +48,23 @@
     </script>
   </head>
   <body>
+    <!--
+      XXX:
+        - clean up from personal notes
+        - include mention of Elizabeth's concerns: https://www.adalovelaceinstitute.org/blog/privacy-enhancing-technologies-not-always-our-friends/
+        - also from Reuben, worth citing (particularly §5.3): https://arxiv.org/abs/2101.08048
+    -->
     <section id="abstract">
       <p>
-        Multiple proposals exist to reform programmatic advertising on the Web and some, most
+        Multiple proposals exist to reform programmatic advertising on the Web. Some, most
         notably <a href="https://github.com/microsoft/privacy-preserving-ads/blob/main/Parakeet.md">PARAKEET</a>,
-        the FLEDGE bid server, and ongoing work by <a href="https://prebid.org/">Prebid</a>, rely on
-        the existence of a <em>trustworthy</em> server that can perform tasks such as anonymising ad
-        requests. This type of model has interesting properties, notably they are easier to audit
-        and do not require moving significant chunks of logic into the browser, but they also suffer
-        from the problem that the server itself must be trusted, even while sitting outside the
-        realm of the user's control.
+        the <a href="https://github.com/WICG/turtledove/blob/master/FLEDGE.md">FLEDGE</a> bid server,
+        and ongoing work by <a href="https://prebid.org/">Prebid</a>, rely on the existence of a
+        <em>trustworthy</em> server that can perform tasks such as anonymising ad requests. This type
+        of model has interesting properties, notably they are easier to audit and do not require
+        moving significant chunks of logic into the browser, but they also suffer from the problem
+        that the server itself must be trusted, even while sitting outside the realm of the user's
+        control.
       </p>
       <p>
         This document drafts an overall vision and governance model able to support such
@@ -65,9 +75,6 @@
       </p>
     </section>
     <section id="sotd"></section>
-    <!--
-      XXX:
-    -->
     <section>
       <h2>The Goal of Garuda</h2>
       <p>
