@@ -43,6 +43,11 @@
         edDraftURI: 'https://darobin.github.io/garuda/',
         shortName: 'garuda',
         localBiblio: {
+          'PUP': {
+            title: 'Principles of User Privacy (PUP)',
+            authors: ['Robin Berjon'],
+            href: 'https://darobin.github.io/pup/',
+          },
         },
       };
     </script>
@@ -114,9 +119,9 @@
       </p>
     </section>
     <section>
-      <h2>The Goal</h2>
+      <h2>Objective</h2>
       <p>
-        The objective of Garuda is to <em>make a trustworthy advertising server
+        The goal of Garuda is to <em>make a trustworthy advertising server
         possible.</em> The notion of a trustworthy advertising server is a potentially very
         powerful one in that it can enable a number of highly-desirable use cases in advertising
         technology, notably that of anonymising requests. However, trust does not appear as if by
@@ -210,19 +215,12 @@
       </dl>
     </section>
     <section>
-      <h2>Governance for Advertising</h2>
-      <!-- XXX: this needs rewriting -->
+      <h2>Governance Model</h2>
       <p>
-        The past two decades in digital advertising have largely been defined by the avoidance of
-        governance, and I believe that we have reached a stage at which most actors would agree it
-        is time for a change. What would that look like?
-      </p>
-      <p>
-        The proposed trustworthy servers look likely to all be open source. That is an important
-        first step but is not sufficient. Just because a solution is open source does not prove that
-        the code which one can inspect is what is running on a given server. Stronger guarantees of
-        auditing and verification are required for this system to prove itself as trustworthy to all
-        parties.
+        This section provides only an outline of the governance model for the [=Garuda institution=].
+        At this stage, my purpose is solely to describe the approach and sketch out enough of its
+        mechanics to establish feasibility. Development of the full principles and bylaws will, by
+        nature, have to be an open and multistakeholder exercise.
       </p>
       <p>
         Significant parts of the Internet's infrastructure operate under more or less formal
@@ -231,86 +229,93 @@
         advertising too.
       </p>
       <p>
-        Detailing a full governance model would be a longer undertaking that would require input
-        from a variety of partners. I'm simply including a quick outline to show feasibility.
+        The [=Garuda institution=] is comprised of two primary bodies: the [=Governance Board=] and
+        the [=Legal Entity=].
       </p>
       <p>
-        The governance model can be summarised as follows:
+        The <dfn data-lt="Board">Governance Board</dfn> is tasked with the oversight of the
+        [=institution=]. It concerns itself primarily with the [=principles=], which it will control
+        for in the behaviour of the [=Legal Entity=] as well as the technical standards and open
+        source implementation of the trusted server. It also names the [=Executive Director=].
+        All [=Board=] deliberations are public (with perhaps a few exceptions for personnel matters).
+      </p>
+      <p>
+        The <dfn data-lt="LE">Legal Entity</dfn> takes care of day-to-day operations. It is
+        responsible for maintaining, deploying, and operating the trusted server at requisite SLAs
+        and at reasonable cost, as well as of research into future technology that Garuda could use,
+        with organising the various working groups that will bring stakeholders together to help
+        evolve Garuda over time, and with the elaboration of policy positions which Garuda will
+        cooperate with regulators on. It is run by the [=Executive Director=].
+      </p>
+      <p>
+        The [=Board=] selects (by consensus) an <dfn data-lt="ED">Executive Director</dfn> every three years or
+        whenever the post becomes vacant. There is a strong assumption that the [=Executive Director=]
+        will not necessarily be renewed: every time a new [=ED=] must be selected, the [=Board=] is
+        expected to review multiple candidates. The [=Board=] can revoke the [=ED=] with a
+        [=supermajority=]. The [=ED=] leads the [=Legal Entity=].
+      </p>
+      <p>
+        Garuda operates according to fundamental <dfn data-lt="principles">ethical principles</dfn>
+        (which need to be written before it kicks off, [[?ETHICAL-WEB]], [[?RFC8890]], or [[?PUP]]
+        are good starting points). These [=principles=] can be changed with [=supermajority=]. The
+        purpose of these [=principles=] is to guide the [=Board=]'s discussions and inform its decisions.
+      </p>
+      <p>
+        There are three primary <dfn>constituencies</dfn>: browser vendors (vendors, not engines, and
+        expected to proxy for users), publishers, and adtech intermediaries. For each of them,
+        there are inclusion criteria that are based on volume of the traffic they see through the
+        trusted server. The volume threshold can differ per [=constituency=], it is designed to
+        prevent gaming the system by spawning multiple entities. Entities with sufficient volume
+        have voting rights on a one-entity/one-vote basis, there is no volume proration.
+      </p>
+      <p>
+        Any entity eligible to be part of a [=constituency=] has some voting rights. These voting
+        rights allow them to elect their representatives to the [=Governance Board=] for that
+        [=constituency=]. Candidates can be nominated by any entity with voting rights.
+        [=Board=] seats are open for three years with a third being renewed every year.
+      </p>
+      <p>
+        Each [=constituency=] has three representatives on the [=Board=]. No company can have more
+        than one representative, even if it participates in different [=constituencies=]. If one
+        [=constituency=] has fewer than two candidates in a given election, then it gains zero
+        representation. (If interest from that group is too low, it shouldn't be taken over by a
+        single party.)
+      </p>
+      <p>
+        <dfn>Supermajority</dfn>: some changes require a [=supermajority=] of the [=Board=].
+        [=Supermajority=] is defined as:
       </p>
       <ul>
         <li>
-          There are three primary constituencies: browser vendors (vendors, not engines, and
-          expected to proxy for users), publishers, and adtech intermediaries. For each of them,
-          there are inclusion criteria that are based on volume of the traffic they see through the
-          trustworthy server.
+          ⅔rd of the members of the [=Board=] vote in support; and
         </li>
         <li>
-          Any entity eligible to be part of a constituency has some voting rights. These voting
-          rights allow them to elect their representatives to the Governance Board for that
-          constituency. Candidates can be nominated by any party with voting rights. Governance
-          Board seats are open for three years with a third being renewed every year.
-        </li>
-        <li>
-          Oversight over Garuda is managed by the Governance Board. Each constituency has three
-          representatives on that board. No company can have more than one representative, even in
-          different constituencies. If one constituency has fewer than two candidates in a given
-          election, then it gains zero representation. (If interest from that group is too low, it
-          shouldn't be taken over by a single party.)
-        </li>
-        <li>
-          Supermajority rule: some changes require a supermajority of the Board. Supermajority is
-          defined as:
-          <ul>
-            <li>
-              ⅔rd of the members of the Board vote in support; and
-            </li>
-            <li>
-              at least one Board member from each constituency must vote in support (so if the
-              three members from one constituency are agreed against, they effectively have veto
-              power).
-            </li>
-          </ul>
-        </li>
-        <li>
-          Garuda operates according to fundamental ethical principles (which need to be written
-          before it kicks off). These principles can be changed with supermajority. The purpose of
-          these principles is to guide the Board's discussions and inform its decisions. All Board
-          deliberations are public (with perhaps a few exceptions for personnel matters).
-        </li>
-        <li>
-          The Governance Board selects (by consensus) an Executive Director every three years.
-          There is a strong assumption that the Executive Director will not necessarily be renewed:
-          every time a new ED must be selected, the Board is expected to review multiple candidates.
-          The Board can revoke the ED with supermajority.
-        </li>
-        <li>
-          The Executive Director leads the Garuda Legal Entity, under the control of the Board.
-          The Legal Entity is tasked with day to day operations, including of the servers, with
-          research into future technology that Garuda could use, with organising the various working
-          groups that will bring stakeholders together to help evolve Garuda over time, and with the
-          elaboration of policy positions which Garuda will cooperate with regulators on.
-        </li>
-        <li>
-          The Legal Entity is financed through a very small tax on advertising. Two models are
-          possible: one is a flat fee per request, another is a percentage of effective CPM. The
-          latter is preferred in that it will incentivise Garuda to increase effectiveness of
-          advertising (whereas the former incentivises volume) but may prove more complicated to
-          build, especially in terms of how to avoid lying about it (so long as it's above the
-          provided bid floor). The amount and type of the tax is determined by the Board. The
-          overall taxation structure might further depend on the type of operation requested, since
-          not all are equally computationally expensive, and making sure that we properly cost in
-          computational cost is important from an ecological point of view.
-        </li>
-        <li>
-          Part of the tax should further be set aside to provide financial support to stakeholders
-          who cannot afford to pay someone to spend time in Board discussions, so as to ensure that
-          participants from companies of all sizes, and from all backgrounds the world around can
-          participate with equity.
+          at least one [=Board=] member from each [=constituency=] must vote in support (so if the
+          three members from one [=constituency=] are agreed against, they effectively have veto
+          power).
         </li>
       </ul>
+      <p>
+        The [=Legal Entity=] is financed through a very small tax on advertising. Two models are
+        possible: one is a flat fee per request, another is a percentage of effective CPM. The
+        latter is preferred in that it will incentivise Garuda to increase effectiveness of
+        advertising (whereas the former incentivises volume) but may prove more complicated to
+        build, especially in terms of how to avoid lying about it (so long as it's above the
+        provided bid floor). The amount and type of the tax is determined by the [=Board=]. The
+        overall taxation structure might further depend on the type of operation requested, since
+        not all are equally computationally expensive, and making sure that we properly cost in
+        computational cost is important from an ecological point of view.
+      </p>
+      <p>
+        Part of the tax should further be set aside to provide financial support to stakeholders
+        who cannot afford to pay someone to spend time in [=Board=] discussions, so as to ensure that
+        participants from companies of all sizes, and from all backgrounds the world around can
+        participate with equity.
+      </p>
     </section>
     <section>
       <h2>Use Cases This Opens Up</h2>
+      <!-- XXX: frame this as now and potential future -->
       <p>
         The immediate focus is on getting enough of a PARAKEET-like structure off the ground, so
         that we can have an open source system and the server infrastructure to operate it in a
@@ -373,6 +378,7 @@
       <p>
         These issues need to be addressed before this can move forward.
       </p>
+      <!-- XXX: the user issue is bigger -->
       <section>
         <h3>The buy side is not represented</h3>
         <p>
