@@ -54,11 +54,9 @@
   </head>
   <body>
     <!--
-      XXX:
-        - clean up from personal notes
+      For future iterations:
         - include mention of Elizabeth's concerns: https://www.adalovelaceinstitute.org/blog/privacy-enhancing-technologies-not-always-our-friends/
         - also from Reuben, worth citing (particularly §5.3): https://arxiv.org/abs/2101.08048
-      For future iterations:
         - Eventually, the "Ad Requests" in Garuda could evolved into "Attention Resources".
         - If we have trustworthy origins, could this make SXG viable? What governance would that need?
     -->
@@ -378,10 +376,46 @@
       <p>
         These issues need to be addressed before this can move forward.
       </p>
+      <p>
+        One core problem in institution provision is <u>how to pick who is legitimately in a given
+        constituency</u>, or put differently who is the polity? Garuda selects the polities of its
+        constituencies through volume thresholds as measured by the trusted server. This is expedient
+        for some constituencies, but does not work for all (see below).
+      </p>
+      <p>
+        Another core problem is <u>how to ensure that the constituencies are balanced</u>?
+        Historically, the interests of the buy-side and of the intermediaries have often aligned
+        against users, with publishers splitting between the two. A system in which some stakeholder
+        constituencies that are almost always aligned have a guaranteed majority will lack the checks
+        and balances to be effective, fair, and credible.
+      </p>
+      <p>
+        This can in part be addressed with principles (which we need anyway, and that would
+        prevent approaching users from an adversarial angle), which can't be changed without support
+        from at least one entity in each constituency, and also from the fact that if
+        user-hostile tactics were to become supported in Garuda then enough browsers would just walk
+        as to void their constituency, returning the world to ad blocking as the logical line of
+        defense. But that offers relatively weak protection.
+      </p>
       <section>
         <h3>Users are not represented</h3>
-        <!-- XXX: the user issue is bigger -->
         <p>
+          Traditionally, user agents have taken on the role of aligning with users. As detailed in
+          [[?RFC8890]], this is an architecture that presents multiple advantages. Unfortunately,
+          in recent times, some user agents have drifted away from this position of trustworthiness,
+          and this complicates the process of relying on them as representatives of users.
+        </p>
+        <p>
+          Additionally, the problems created by advertising often target underrepresented and
+          marginalised communities, issues which browser vendors have limited expertise in
+          combating. Browser vendors are not, either in terms of their employees or their legal
+          structures, very representative of the global community, notably of the global South.
+        </p>
+        <p>
+          Establishing a legitimate worldwide polity for humankind (including those not yet
+          connected whose participation could be helped by a healthy advertising ecosystem) is not a
+          problem that we can solve, however we should seek ways to increase representativity. One
+          option could be the UN (possibly as an observer).
         </p>
       </section>
       <section>
@@ -391,16 +425,9 @@
           incentives to keep everyone honest in terms of fraud, effectiveness, and brand safety.
         </p>
         <p>
-          There are several problems to solve here, though.
-        </p>
-        <p>
-          The first is <u>how to pick who is legitimately in that constituency</u>? For the other
-          three constituencies, we can gate on volume thresholds as measured by the Garuda system
-          itself. This makes for a reasonably easy system to select who is in the polity and has the
-          right to vote. For the buy side, one step removed, this is more complex. We probably cannot
-          scale this to every store that bought $300's worth of ads in the local paper (though, if
-          that were possible, it might be interesting). This would make it too easy and too cheap to
-          buy votes, too.
+          It is not obvious how to pick a good polity for this group either. There is also a risk
+          that they could align excessively with intermediaries, which would unbalance the
+          governance structure and undermine its credibility.
         </p>
         <p>
           One potential solution is to make it so that the Garuda system knows who is paying for
@@ -408,27 +435,11 @@
           and revenue transparency, this is a requirement anyway as the creative will need to contain
           verifiable information about who paid for it and how much. Extracting this payment
           information would make it possible to establish a volume threshold (in spend) for the
-          buy-side to be represented.
+          buy-side to be represented. This would not address balancing issues — unless users also
+          got a constituency of their own (or intermediaries lost theirs).
         </p>
         <p>
-          The second issue is <u>how to ensure that the constituencies are balanced</u>?
-          Historically, the interests of the buy-side and of the intermediaries have often aligned
-          against users, with publishers splitting between the two. This would almost guarantee
-          user-hostile outcomes such as a return to transparency &amp; control regimes or the
-          rejection of user agents as the user's fiduciary.
-        </p>
-        <p>
-          This could perhaps be addressed with principles (which we need anyway, and that would
-          prevent approaching users from an adversarial angle), which can't be changed without support
-          from at least one entity in each constituency, and also from the fact that if such
-          user-hostile tactics were to become supported in Garuda then the browsers would just walk,
-          returning the world to ad blocking and the such. But that feels like a relatively weak
-          protection.
-        </p>
-        <p>
-          Another way to address would be to add a fifth constituency being consumer organisations
-          (and having the browsers represent themselves only). But I have no idea how to select that
-          polity.
+          Another potential option would be the WFA (possibly as an observer).
         </p>
       </section>
     </section>
