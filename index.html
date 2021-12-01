@@ -24,8 +24,8 @@
       var respecConfig = {
         specStatus: 'unofficial',
         postProcess: [(config, doc) => {
-          let time = doc.querySelector('.head h2 time')
-            , h2 = doc.querySelector('.head h2')
+          let time = doc.querySelector('#w3c-state time')
+            , h2 = doc.querySelector('#w3c-state')
           ;
           h2.innerHTML = 'Proposal ';
           h2.appendChild(time);
